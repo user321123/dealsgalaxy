@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "title": "Logitech G502 Gaming Maus",
+    "category": "gaming",
+    "oldPrice": 89.99,
+    "currentPrice": 54.90,
+    "discount": 39,
+    "image": "https://m.media-amazon.com/images/I/718b95Ls2XL._AC_SL1500_.jpg",
+    "url": "https://amzn.to/DEIN_LINK"
+  },
+  {
+    "id": "2",
+    "title": "Cosori Heißluftfritteuse 5,5L",
+    "category": "kueche",
+    "oldPrice": 129.99,
+    "currentPrice": 99.00,
+    "discount": 24,
+    "image": "https://m.media-amazon.com/images/I/71vS9Xo6mRL._AC_SL1500_.jpg",
+    "url": "https://amzn.to/DEIN_LINK"
+  }
+]
