@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Deals - 20% Rabatt & mehr</title>
+    <title>Best Deals - Alle Kategorien</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -11,20 +11,25 @@
 
     <div class="navbar bg-base-100 shadow-lg px-4 md:px-20">
         <div class="flex-1">
-            <a class="text-2xl font-bold text-primary">DEAL<span class="text-secondary">HUNTER</span></a>
+            <a href="./index.html" class="text-2xl font-bold text-primary">
+                DEAL<span class="text-secondary">HUNTER</span>
+            </a>
         </div>
     </div>
 
     <main class="container mx-auto p-6">
+
+        <!-- Links zu Nischen-Seiten -->
         <div class="flex flex-wrap gap-4 mb-10 justify-center">
-            <button onclick="filterNiche('all')" class="btn btn-outline btn-primary">Alle Deals</button>
-            <button onclick="filterNiche('gaming')" class="btn btn-outline btn-primary">Gaming</button>
-            <button onclick="filterNiche('kueche')" class="btn btn-outline btn-primary">Küche</button>
-            <button onclick="filterNiche('technik')" class="btn btn-outline btn-primary">Technik</button>
+            <a href="./gaming/" class="btn btn-outline btn-primary">Gaming</a>
+            <a href="./kueche/" class="btn btn-outline btn-primary">Küche</a>
+            <a href="./technik/" class="btn btn-outline btn-primary">Technik</a>
         </div>
 
+        <h1 class="text-3xl font-bold mb-6 text-center">Alle Deals</h1>
+
         <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            </div>
+        </div>
     </main>
 
     <script src="script.js"></script>
