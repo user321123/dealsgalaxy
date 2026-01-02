@@ -1,7 +1,15 @@
 async function loadProducts() {
     try {
         // Fake-API laden (später durch Amazon API ersetzen)
-        const response = await fetch("./data/products.json");
+        const basePath = location.pathname.includes("/alle/") ||
+                 location.pathname.includes("/gaming/") ||
+                 location.pathname.includes("/kueche/") ||
+                 location.pathname.includes("/technik/")
+                 ? "../"
+                 : "./";
+
+        const response = await fetch(basePath + "data/products.json");
+
         const products = await response.json();
 
         renderProducts(products);
