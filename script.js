@@ -5,10 +5,12 @@ function getCategoryFile() {
     if (path.includes("/gaming/")) return "gaming.json";
     if (path.includes("/kueche/")) return "kueche.json";
     if (path.includes("/technik/")) return "technik.json";
+    if (path.includes("/alle/")) return "alle.json";
 
-    // Hauptseite + /alle/ laden ALLE Produkte
+    // Startseite lädt IMMER alle Produkte
     return "alle.json";
 }
+
 
 async function loadProducts() {
     try {
