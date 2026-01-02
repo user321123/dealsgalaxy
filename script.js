@@ -1,20 +1,20 @@
 let allProducts = [];
 
-// 1. Produkte laden
+// Produkte laden
 async function loadProducts() {
     try {
         const response = await fetch('products.json');
         allProducts = await response.json();
-        renderProducts(allProducts);
+        renderProducts(allProducts); // alle anzeigen
     } catch (error) {
         console.error("Fehler beim Laden der Produkte:", error);
     }
 }
 
-// 2. Produkte anzeigen
+// Produkte anzeigen
 function renderProducts(products) {
     const grid = document.getElementById('product-grid');
-    grid.innerHTML = ''; // Grid leeren
+    grid.innerHTML = '';
 
     products.forEach(p => {
         grid.innerHTML += `
@@ -36,16 +36,6 @@ function renderProducts(products) {
             </div>
         `;
     });
-}
-
-// 3. Filter-Funktion
-function filterNiche(niche) {
-    if (niche === 'all') {
-        renderProducts(allProducts);
-    } else {
-        const filtered = allProducts.filter(p => p.category === niche);
-        renderProducts(filtered);
-    }
 }
 
 // Start
