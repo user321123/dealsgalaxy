@@ -1,22 +1,74 @@
 [
   {
-    "id": "1",
-    "title": "Logitech G502 Gaming Maus",
+    "asin": "GAM001",
+    "title": "Logitech G502 HERO Gaming Maus",
     "category": "gaming",
-    "oldPrice": 89.99,
-    "currentPrice": 54.90,
-    "discount": 39,
-    "image": "https://m.media-amazon.com/images/I/718b95Ls2XL._AC_SL1500_.jpg",
-    "url": "https://amzn.to/DEIN_LINK"
+    "currentPrice": 39.99,
+    "oldPrice": 59.99,
+    "discount": 33,
+    "image": "https://via.placeholder.com/300?text=G502",
+    "url": "#"
   },
   {
-    "id": "2",
-    "title": "Cosori Heißluftfritteuse 5,5L",
-    "category": "kueche",
+    "asin": "GAM002",
+    "title": "Razer BlackWidow V3 Mechanische Tastatur",
+    "category": "gaming",
+    "currentPrice": 89.99,
     "oldPrice": 129.99,
-    "currentPrice": 99.00,
-    "discount": 24,
-    "image": "https://m.media-amazon.com/images/I/71vS9Xo6mRL._AC_SL1500_.jpg",
-    "url": "https://amzn.to/DEIN_LINK"
+    "discount": 31,
+    "image": "https://via.placeholder.com/300?text=BlackWidow",
+    "url": "#"
+  },
+  {
+    "asin": "GAM003",
+    "title": "HyperX Cloud II Gaming Headset",
+    "category": "gaming",
+    "currentPrice": 79.99,
+    "oldPrice": 99.99,
+    "discount": 20,
+    "image": "https://via.placeholder.com/300?text=Cloud+II",
+    "url": "#"
+  },
+
+  {
+    "asin": "KUE001",
+    "title": "Philips Airfryer XXL",
+    "category": "kueche",
+    "currentPrice": 199.99,
+    "oldPrice": 249.99,
+    "discount": 20,
+    "image": "https://via.placeholder.com/300?text=Airfryer",
+    "url": "#"
+  },
+  {
+    "asin": "KUE002",
+    "title": "KitchenAid Artisan Küchenmaschine",
+    "category": "kueche",
+    "currentPrice": 499.99,
+    "oldPrice": 599.99,
+    "discount": 17,
+    "image": "https://via.placeholder.com/300?text=KitchenAid",
+    "url": "#"
+  },
+
+  {
+    "asin": "TEC001",
+    "title": "Samsung 4K UHD Monitor 28 Zoll",
+    "category": "technik",
+    "currentPrice": 249.99,
+    "oldPrice": 299.99,
+    "discount": 17,
+    "image": "https://via.placeholder.com/300?text=Samsung+4K",
+    "url": "#"
+  },
+  {
+    "asin": "TEC002",
+    "title": "Apple AirPods Pro 2",
+    "category": "technik",
+    "currentPrice": 229.99,
+    "oldPrice": 279.99,
+    "discount": 18,
+    "image": "https://via.placeholder.com/300?text=AirPods+Pro",
+    "url": "#"
   }
 ]
