@@ -1,8 +1,9 @@
 async function loadProducts() {
-    const response = await fetch("../products.json");
+    const response = await fetch("/dealsgalaxy/products.json");
     const products = await response.json();
     renderProducts(products);
 }
+
 
 function renderProducts(products) {
     const grid = document.getElementById("product-grid");
