@@ -70,5 +70,218 @@
     "discount": 18,
     "image": "https://via.placeholder.com/300?text=AirPods+Pro",
     "url": "#"
+  },
+
+  {
+    "asin": "GAM004",
+    "title": "SteelSeries Rival 600 Gaming Maus",
+    "category": "gaming",
+    "currentPrice": 49.99,
+    "oldPrice": 79.99,
+    "discount": 38,
+    "image": "https://via.placeholder.com/300?text=Rival+600",
+    "url": "#"
+  },
+  {
+    "asin": "GAM005",
+    "title": "Corsair K70 RGB MK.2 Tastatur",
+    "category": "gaming",
+    "currentPrice": 119.99,
+    "oldPrice": 159.99,
+    "discount": 25,
+    "image": "https://via.placeholder.com/300?text=K70+RGB",
+    "url": "#"
+  },
+  {
+    "asin": "GAM006",
+    "title": "Logitech G Pro X Wireless Headset",
+    "category": "gaming",
+    "currentPrice": 149.99,
+    "oldPrice": 199.99,
+    "discount": 25,
+    "image": "https://via.placeholder.com/300?text=G+Pro+X",
+    "url": "#"
+  },
+  {
+    "asin": "GAM007",
+    "title": "Razer Viper Ultimate Wireless Maus",
+    "category": "gaming",
+    "currentPrice": 89.99,
+    "oldPrice": 149.99,
+    "discount": 40,
+    "image": "https://via.placeholder.com/300?text=Viper+Ultimate",
+    "url": "#"
+  },
+  {
+    "asin": "GAM008",
+    "title": "ASUS TUF Gaming K1 RGB Tastatur",
+    "category": "gaming",
+    "currentPrice": 39.99,
+    "oldPrice": 59.99,
+    "discount": 33,
+    "image": "https://via.placeholder.com/300?text=TUF+K1",
+    "url": "#"
+  },
+  {
+    "asin": "GAM009",
+    "title": "HyperX Pulsefire FPS Pro Maus",
+    "category": "gaming",
+    "currentPrice": 29.99,
+    "oldPrice": 49.99,
+    "discount": 40,
+    "image": "https://via.placeholder.com/300?text=Pulsefire+FPS",
+    "url": "#"
+  },
+  {
+    "asin": "GAM010",
+    "title": "Logitech G733 Lightspeed Headset",
+    "category": "gaming",
+    "currentPrice": 119.99,
+    "oldPrice": 149.99,
+    "discount": 20,
+    "image": "https://via.placeholder.com/300?text=G733",
+    "url": "#"
+  },
+
+  {
+    "asin": "KUE003",
+    "title": "Bosch Küchenmaschine MUM5",
+    "category": "kueche",
+    "currentPrice": 199.99,
+    "oldPrice": 249.99,
+    "discount": 20,
+    "image": "https://via.placeholder.com/300?text=Bosch+MUM5",
+    "url": "#"
+  },
+  {
+    "asin": "KUE004",
+    "title": "WMF ProfiSelect Pfannen-Set",
+    "category": "kueche",
+    "currentPrice": 79.99,
+    "oldPrice": 129.99,
+    "discount": 38,
+    "image": "https://via.placeholder.com/300?text=WMF+Pfannen",
+    "url": "#"
+  },
+  {
+    "asin": "KUE005",
+    "title": "Tefal OptiGrill Elite",
+    "category": "kueche",
+    "currentPrice": 149.99,
+    "oldPrice": 199.99,
+    "discount": 25,
+    "image": "https://via.placeholder.com/300?text=OptiGrill",
+    "url": "#"
+  },
+  {
+    "asin": "KUE006",
+    "title": "Siemens EQ.6 Kaffeevollautomat",
+    "category": "kueche",
+    "currentPrice": 599.99,
+    "oldPrice": 799.99,
+    "discount": 25,
+    "image": "https://via.placeholder.com/300?text=EQ6",
+    "url": "#"
+  },
+  {
+    "asin": "KUE007",
+    "title": "Braun Multiquick 9 Stabmixer",
+    "category": "kueche",
+    "currentPrice": 89.99,
+    "oldPrice": 129.99,
+    "discount": 31,
+    "image": "https://via.placeholder.com/300?text=MQ9",
+    "url": "#"
+  },
+  {
+    "asin": "KUE008",
+    "title": "WMF Küchenmesser-Set 6-teilig",
+    "category": "kueche",
+    "currentPrice": 49.99,
+    "oldPrice": 79.99,
+    "discount": 38,
+    "image": "https://via.placeholder.com/300?text=Messer+Set",
+    "url": "#"
+  },
+  {
+    "asin": "KUE009",
+    "title": "Russell Hobbs Wasserkocher Glas",
+    "category": "kueche",
+    "currentPrice": 29.99,
+    "oldPrice": 49.99,
+    "discount": 40,
+    "image": "https://via.placeholder.com/300?text=Wasserkocher",
+    "url": "#"
+  },
+
+  {
+    "asin": "TEC003",
+    "title": "Sony WH-1000XM5 Kopfhörer",
+    "category": "technik",
+    "currentPrice": 299.99,
+    "oldPrice": 399.99,
+    "discount": 25,
+    "image": "https://via.placeholder.com/300?text=XM5",
+    "url": "#"
+  },
+  {
+    "asin": "TEC004",
+    "title": "Anker PowerCore 20.000mAh Powerbank",
+    "category": "technik",
+    "currentPrice": 39.99,
+    "oldPrice": 59.99,
+    "discount": 33,
+    "image": "https://via.placeholder.com/300?text=PowerCore",
+    "url": "#"
+  },
+  {
+    "asin": "TEC005",
+    "title": "Xiaomi Mi Smart Speaker",
+    "category": "technik",
+    "currentPrice": 29.99,
+    "oldPrice": 49.99,
+    "discount": 40,
+    "image": "https://via.placeholder.com/300?text=Mi+Speaker",
+    "url": "#"
+  },
+  {
+    "asin": "TEC006",
+    "title": "TP-Link Archer AX55 WiFi 6 Router",
+    "category": "technik",
+    "currentPrice": 79.99,
+    "oldPrice": 129.99,
+    "discount": 38,
+    "image": "https://via.placeholder.com/300?text=AX55",
+    "url": "#"
+  },
+  {
+    "asin": "TEC007",
+    "title": "Logitech MX Master 3S",
+    "category": "technik",
+    "currentPrice": 79.99,
+    "oldPrice": 119.99,
+    "discount": 33,
+    "image": "https://via.placeholder.com/300?text=MX+Master+3S",
+    "url": "#"
+  },
+  {
+    "asin": "TEC008",
+    "title": "Samsung Galaxy Tab A8",
+    "category": "technik",
+    "currentPrice": 169.99,
+    "oldPrice": 229.99,
+    "discount": 26,
+    "image": "https://via.placeholder.com/300?text=Galaxy+A8",
+    "url": "#"
+  },
+  {
+    "asin": "TEC009",
+    "title": "JBL Charge 5 Bluetooth Lautsprecher",
+    "category": "technik",
+    "currentPrice": 119.99,
+    "oldPrice": 179.99,
+    "discount": 33,
+    "image": "https://via.placeholder.com/300?text=Charge+5",
+    "url": "#"
   }
 ]
