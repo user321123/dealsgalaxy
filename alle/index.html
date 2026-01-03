@@ -1,40 +1,37 @@
-<body class="min-h-screen bg-base-200">
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alle Deals – Best Deals</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200 min-h-screen">
 
-    <div class="max-w-6xl mx-auto px-4 py-6 space-y-4">
-        <!-- Toolbar: Sortierung + Suche -->
-        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div class="flex items-center gap-2">
-                <label for="sort-select" class="font-medium">Sortieren nach:</label>
-                <select id="sort-select" class="select select-bordered select-sm">
-                    <option value="empfohlen">Empfohlen</option>
-                    <option value="price-asc">Preis: Aufsteigend</option>
-                    <option value="price-desc">Preis: Absteigend</option>
-                    <option value="discount-desc">Prozente: Höchster Rabatt</option>
-                    <option value="rating-desc">Durchschnitt Bewertung</option>
-                </select>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <label for="search-input" class="font-medium">Suche:</label>
-                <input
-                    id="search-input"
-                    type="text"
-                    placeholder="Produkt, Kategorie, Marke …"
-                    class="input input-bordered input-sm w-full md:w-64"
-                />
-            </div>
-        </div>
-
-        <!-- Produkt-Grid -->
-        <div id="product-grid" class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            <!-- Karten werden per JS eingefügt -->
-        </div>
-
-        <!-- Pagination -->
-        <div id="pagination" class="flex justify-center items-center gap-2 pt-4">
-            <!-- Buttons werden per JS eingefügt -->
-        </div>
+<div class="navbar bg-base-100 shadow-lg px-4 md:px-20">
+    <div class="flex-1">
+        <a href="../index.html" class="text-2xl font-bold text-primary">
+            DEAL<span class="text-secondary">HUNTER</span>
+        </a>
     </div>
+</div>
+    
+<div class="flex flex-wrap gap-4 mb-10 justify-center mt-6">
+    <a href="../alle/" class="btn btn-primary btn-active">Alle Deals</a>
+    <a href="../gaming/" class="btn btn-outline btn-primary">Gaming</a>
+    <a href="../kueche/" class="btn btn-outline btn-primary">Küche</a>
+    <a href="../technik/" class="btn btn-outline btn-primary">Technik</a>
+</div>
 
-    <script src="/dealsgalaxy/alle/script.js"></script>
+    <main class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Alle Deals</h1>
+
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+    </main>
+    
+    <script src="script.js?v=6"></script>
+
+
 </body>
+</html>
