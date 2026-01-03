@@ -5,7 +5,6 @@ async function loadProducts() {
     renderProducts(filtered);
 }
 
-
 function renderProducts(products) {
     const grid = document.getElementById("product-grid");
     grid.innerHTML = "";
