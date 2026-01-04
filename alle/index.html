@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alle Deals – Best Deals</title>
+    <title>Alle Deals – DealHunter</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -12,44 +12,41 @@
 <!-- NAVBAR -->
 <div class="navbar bg-base-100 shadow-lg px-4 md:px-20 relative">
 
-    <!-- Linke Seite: Logo -->
     <div class="flex-1">
-        <a href="../index.html" class="text-2xl font-bold text-primary">
+        <a href="../index.html" class="text-3xl font-bold text-primary tracking-wide">
             DEAL<span class="text-secondary">HUNTER</span>
         </a>
     </div>
 
-    <!-- ZENTRIERTE, DOPPELT SO LANGE SUCHLEISTE -->
     <div class="absolute left-1/2 -translate-x-1/2">
-        <input 
-            id="search-input"
-            type="text" 
-            placeholder="Suche nach Angeboten…" 
-            class="input input-bordered h-12 text-lg w-[32rem] md:w-[40rem]"
-        />
+        <div class="relative">
+            <input 
+                id="search-input"
+                type="text" 
+                placeholder="Suche nach Angeboten…" 
+                class="input input-bordered h-12 text-lg w-[32rem] md:w-[40rem] rounded-xl shadow-md pr-12"
+            />
+            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl">🔍</span>
+        </div>
     </div>
 
-    <!-- Rechte Seite (leer, damit Mitte funktioniert) -->
     <div class="flex-1"></div>
-
 </div>
 
-
 <!-- KATEGORIEN -->
-<div class="flex flex-wrap gap-4 mb-10 justify-center mt-6">
-    <a href="../alle/" class="btn btn-primary btn-active">Alle Deals</a>
-    <a href="../gaming/" class="btn btn-outline btn-primary">Gaming</a>
-    <a href="../kueche/" class="btn btn-outline btn-primary">Küche</a>
-    <a href="../technik/" class="btn btn-outline btn-primary">Technik</a>
+<div class="flex flex-wrap gap-4 mb-10 justify-center mt-8">
+    <a href="../alle/" class="btn btn-primary rounded-full px-8">Alle Deals</a>
+    <a href="../gaming/" class="btn btn-outline btn-primary rounded-full px-8">Gaming</a>
+    <a href="../kueche/" class="btn btn-outline btn-primary rounded-full px-8">Küche</a>
+    <a href="../technik/" class="btn btn-outline btn-primary rounded-full px-8">Technik</a>
 </div>
 
 <main class="container mx-auto p-6">
 
-    <!-- TITEL + SORTIERUNG -->
-    <div class="flex items-center justify-between mb-6">
-        <h1 class="text-3xl font-bold">Alle Deals</h1>
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-4xl font-bold">Alle Deals</h1>
 
-        <select id="sort-select" class="select select-bordered select-sm">
+        <select id="sort-select" class="select select-bordered select-sm rounded-xl">
             <option value="empfohlen">Empfohlen</option>
             <option value="price-asc">Preis: Aufsteigend</option>
             <option value="price-desc">Preis: Absteigend</option>
@@ -58,15 +55,13 @@
         </select>
     </div>
 
-    <!-- PRODUKTGRID -->
-    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
 
-    <!-- PAGINATION -->
-    <div id="pagination" class="flex justify-center items-center gap-2 pt-10"></div>
+    <div id="pagination" class="flex justify-center items-center gap-3 pt-12"></div>
 
 </main>
 
-<script src="script.js?v=7"></script>
+<script src="script.js?v=8"></script>
 
 </body>
 </html>
