@@ -10,23 +10,30 @@
 <body class="bg-base-200 min-h-screen">
     
 <!-- NAVBAR -->
-<div class="navbar bg-base-100 shadow-lg px-4 md:px-20">
+<div class="navbar bg-base-100 shadow-lg px-4 md:px-20 relative">
+
+    <!-- Linke Seite: Logo -->
     <div class="flex-1">
         <a href="../index.html" class="text-2xl font-bold text-primary">
             DEAL<span class="text-secondary">HUNTER</span>
         </a>
     </div>
 
-    <!-- SUCHFELD -->
-    <div class="flex-none">
+    <!-- ZENTRIERTE, DOPPELT SO LANGE SUCHLEISTE -->
+    <div class="absolute left-1/2 -translate-x-1/2">
         <input 
             id="search-input"
             type="text" 
-            placeholder="Suche…" 
-            class="input input-bordered input-sm w-40 md:w-60"
+            placeholder="Suche nach Angeboten…" 
+            class="input input-bordered h-12 text-lg w-[32rem] md:w-[40rem]"
         />
     </div>
+
+    <!-- Rechte Seite (leer, damit Mitte funktioniert) -->
+    <div class="flex-1"></div>
+
 </div>
+
 
 <!-- KATEGORIEN -->
 <div class="flex flex-wrap gap-4 mb-10 justify-center mt-6">
