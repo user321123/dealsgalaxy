@@ -80,7 +80,7 @@ function sortProducts(products, mode) {
     });
 }
 
-// PRODUKTGRID RENDERN (RESPONSIVE)
+// PRODUKTGRID RENDERN (MODERNISIERT)
 function renderCurrentPage() {
     const grid = document.getElementById("product-grid");
     grid.innerHTML = "";
@@ -96,47 +96,42 @@ function renderCurrentPage() {
 
     pageProducts.forEach(p => {
         const card = document.createElement("div");
-
         card.className =
-            "card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl h-full flex flex-col";
+            "card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl";
 
         card.innerHTML = `
-            <figure class="bg-base-200 rounded-t-xl relative h-48 sm:h-32 flex items-center justify-center overflow-hidden">
-                <img src="${p.image}" alt="${p.title}" 
-                     class="object-cover sm:object-contain w-full h-full p-2 rounded-t-xl" />
+            <figure class="bg-base-200 rounded-t-xl relative">
+                <img src="${p.image}" alt="${p.title}" class="rounded-t-xl object-cover w-full h-48" />
 
                 ${
                     p.discount
-                        ? `<div class="badge badge-secondary absolute top-3 right-3 text-xs sm:text-[10px] py-2 px-3 rounded-full">-${p.discount}%</div>`
+                        ? `<div class="badge badge-secondary absolute top-3 right-3 text-sm py-3 px-4 rounded-full">-${p.discount}%</div>`
                         : ""
                 }
             </figure>
 
-            <div class="card-body flex flex-col justify-between p-4">
+            <div class="card-body">
+                <h2 class="font-bold text-base line-clamp-2 min-h-[3rem]">${p.title}</h2>
 
-                <h2 class="font-bold text-base sm:text-sm leading-snug break-words line-clamp-2 min-h-[3rem] sm:min-h-[2.5rem]">
-                    ${p.title}
-                </h2>
-
-                <div class="flex items-baseline gap-2 mt-1 whitespace-nowrap overflow-hidden">
-                    <span class="text-xl sm:text-lg font-bold text-primary">${p.currentPrice.toFixed(2)} €</span>
+                <div class="flex items-baseline gap-2 mt-1">
+                    <span class="text-xl font-bold text-primary">${p.currentPrice.toFixed(2)} €</span>
                     ${
                         p.oldPrice
-                            ? `<span class="text-sm sm:text-xs line-through text-gray-400">${p.oldPrice.toFixed(2)} €</span>`
+                            ? `<span class="text-sm line-through text-gray-400">${p.oldPrice.toFixed(2)} €</span>`
                             : ""
                     }
                 </div>
 
-                <div class="flex items-center gap-1 text-yellow-500 text-sm sm:text-xs mt-1">
+                <div class="flex items-center gap-1 text-yellow-500 text-sm mt-1">
                     ${p.rating ? "★".repeat(Math.round(p.rating)) : ""}
                     <span class="text-gray-500 ml-1">${p.rating ? p.rating.toFixed(1) : ""}</span>
                 </div>
 
-                <a href="${p.url}" target="_blank" 
-                   class="btn btn-primary btn-sm rounded-full w-full mt-4">
-                    Zum Angebot
-                </a>
-
+                <div class="card-actions justify-end mt-4">
+                    <a href="${p.url}" target="_blank" class="btn btn-primary btn-sm rounded-full px-4">
+                        Zum Angebot
+                    </a>
+                </div>
             </div>
         `;
 
@@ -144,7 +139,7 @@ function renderCurrentPage() {
     });
 }
 
-// PAGINATION
+// PAGINATION (MODERNISIERT)
 function renderPagination() {
     const container = document.getElementById("pagination");
     container.innerHTML = "";
