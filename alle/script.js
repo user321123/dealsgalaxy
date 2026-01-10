@@ -128,9 +128,10 @@ function renderCurrentPage() {
                 </div>
 
                 <div class="card-actions justify-end mt-4">
-                    <a href="${p.url}" target="_blank" class="btn btn-primary btn-sm rounded-full px-4">
-                        Zum Angebot
-                    </a>
+                    <a href="${p.url}" target="_blank" class="btn btn-primary w-full h-12 text-lg rounded-xl">
+                    Zum Angebot
+                </a>
+
                 </div>
             </div>
         `;
