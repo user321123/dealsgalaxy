@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alle Deals – DealHunter</title>
+    <title>Alle Deals – MioDeals</title>
+
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 🎨 MioDeals Farb-Theme -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1E90FF",     // kräftiges MioDeals-Blau
+              secondary: "#00C8FF",   // helleres Cyan-Blau
+              accent: "#4FC3F7",      // weiches Blau
+              neutral: "#1F2937",     // dunkles Grau
+            }
+          }
+        }
+      }
+    </script>
 </head>
+
 <body class="bg-base-200 min-h-screen">
 
 <!-- NAVBAR -->
