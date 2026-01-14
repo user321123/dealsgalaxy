@@ -1,4 +1,4 @@
-console.log("🔥 script.js v9 ist aktiv!");
+console.log("🔥 script.js v10 ist aktiv!");
 
 let allProducts = [];
 let filteredProducts = [];
