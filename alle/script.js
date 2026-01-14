@@ -104,7 +104,7 @@ function renderCurrentPage() {
         card.innerHTML = `
             <figure class="bg-base-200 rounded-t-xl relative">
                <img src="${p.image}" 
-                    class="rounded-t-xl object-cover w-full aspect-[4/3] md:h-48 lg:h-52" />
+                    class="rounded-t-xl object-cover w-full h-32 sm:h-36 md:h-48 lg:h-52" />
 
                 ${
                     p.discount
