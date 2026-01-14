@@ -80,7 +80,7 @@ function sortProducts(products, mode) {
     });
 }
 
-// PRODUKTGRID RENDERN (MODERNISIERT)
+// PRODUKTGRID RENDERN (OPTIMIERT)
 function renderCurrentPage() {
     const grid = document.getElementById("product-grid");
     grid.innerHTML = "";
@@ -101,7 +101,8 @@ function renderCurrentPage() {
 
         card.innerHTML = `
             <figure class="bg-base-200 rounded-t-xl relative">
-               <img src="${p.image}" class="rounded-t-xl object-cover w-full h-40 md:h-48 lg:h-52" />
+               <img src="${p.image}" 
+                    class="rounded-t-xl object-cover w-full aspect-[4/3] md:h-48 lg:h-52" />
 
                 ${
                     p.discount
@@ -110,28 +111,29 @@ function renderCurrentPage() {
                 }
             </figure>
 
-            <div class="card-body">
+            <div class="card-body flex flex-col justify-between">
                 <h2 class="font-bold text-base line-clamp-2 min-h-[3rem]">${p.title}</h2>
 
-                <div class="flex items-baseline gap-2 mt-1">
-                    <span class="text-xl font-bold text-primary">${p.currentPrice.toFixed(2)} €</span>
-                    ${
-                        p.oldPrice
-                            ? `<span class="text-sm line-through text-gray-400">${p.oldPrice.toFixed(2)} €</span>`
-                            : ""
-                    }
-                </div>
+                <div>
+                    <div class="flex items-baseline gap-2 mt-1">
+                        <span class="text-xl font-bold text-primary">${p.currentPrice.toFixed(2)} €</span>
+                        ${
+                            p.oldPrice
+                                ? `<span class="text-sm line-through text-gray-400">${p.oldPrice.toFixed(2)} €</span>`
+                                : ""
+                        }
+                    </div>
 
-                <div class="flex items-center gap-1 text-yellow-500 text-sm mt-1">
-                    ${p.rating ? "★".repeat(Math.round(p.rating)) : ""}
-                    <span class="text-gray-500 ml-1">${p.rating ? p.rating.toFixed(1) : ""}</span>
+                    <div class="flex items-center gap-1 text-yellow-500 text-sm mt-1">
+                        ${p.rating ? "★".repeat(Math.round(p.rating)) : ""}
+                        <span class="text-gray-500 ml-1">${p.rating ? p.rating.toFixed(1) : ""}</span>
+                    </div>
                 </div>
 
                 <div class="card-actions justify-end mt-4">
                     <a href="${p.url}" target="_blank" class="btn btn-primary w-full h-12 text-lg rounded-xl">
-                    Zum Angebot
-                </a>
-
+                        Zum Angebot
+                    </a>
                 </div>
             </div>
         `;
@@ -140,7 +142,7 @@ function renderCurrentPage() {
     });
 }
 
-// PAGINATION (MODERNISIERT)
+// PAGINATION
 function renderPagination() {
     const container = document.getElementById("pagination");
     container.innerHTML = "";
