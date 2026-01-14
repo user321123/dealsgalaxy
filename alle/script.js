@@ -1,3 +1,5 @@
+console.log("🔥 script.js v9 ist aktiv!");
+
 let allProducts = [];
 let filteredProducts = [];
 let currentPage = 1;
