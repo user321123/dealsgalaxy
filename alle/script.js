@@ -10,7 +10,7 @@ async function loadProducts() {
         applyAllAndRender();
         setupEventListeners();
     } catch (error) {
-        document.getElementById("product-grid").innerHTML = `<div class="col-span-full text-center py-20 opacity-50">Angebote konnten nicht geladen werden.</div>`;
+        document.getElementById("product-grid").innerHTML = `<div class="col-span-full text-center py-20">Ladefehler...</div>`;
     }
 }
 
@@ -49,21 +49,18 @@ function renderGrid() {
     grid.innerHTML = items.map(p => {
         const disc = p.discount || (p.oldPrice ? Math.round(100-(p.currentPrice/p.oldPrice*100)) : 0);
         return `
-        <article class="product-card bg-white shadow-sm rounded-lg overflow-hidden flex flex-col h-full border border-slate-100">
-            <div class="relative p-2 md:p-4 bg-white flex justify-center items-center h-40 md:h-64">
-                ${disc > 0 ? `<div class="absolute top-2 left-2 md:top-4 md:left-4 bg-orange-500 text-white font-bold text-[10px] md:text-xs px-2 py-1 rounded shadow-sm">-${disc}%</div>` : ''}
-                <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain p-2" loading="lazy" />
+        <article class="product-card bg-white rounded-lg overflow-hidden flex flex-col h-full shadow-sm border border-slate-100">
+            <div class="relative bg-slate-100 flex justify-center items-center h-40 md:h-60 p-4">
+                ${disc > 0 ? `<div class="absolute top-2 left-2 bg-orange-500 text-white font-bold text-[10px] md:text-xs px-2 py-1 rounded">-${disc}%</div>` : ''}
+                <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain" loading="lazy" />
             </div>
-            <div class="p-4 md:p-6 flex flex-col flex-grow bg-white border-t border-slate-50">
-                <h2 class="text-slate-500 text-[11px] md:text-sm font-medium uppercase mb-1">${p.category || 'Deal'}</h2>
-                <h3 class="font-bold text-slate-800 text-sm md:text-base line-clamp-2 leading-snug mb-4 h-10 md:h-12">${p.title}</h3>
-                
-                <div class="mt-auto mb-4">
-                    <div class="text-2xl md:text-3xl font-black text-slate-800">${p.currentPrice.toFixed(2)}€</div>
-                    ${p.oldPrice ? `<div class="text-[10px] md:text-xs text-slate-400">UVP: <span class="line-through">${p.oldPrice.toFixed(2)}€</span></div>` : ''}
+            <div class="p-3 md:p-6 flex flex-col flex-grow bg-white">
+                <h3 class="font-bold text-slate-800 text-[11px] md:text-base line-clamp-2 leading-tight mb-2 h-8 md:h-12">${p.title}</h3>
+                <div class="mb-4">
+                    <div class="text-lg md:text-2xl font-black text-orange-600">${p.currentPrice.toFixed(2)}€</div>
+                    ${p.oldPrice ? `<div class="text-[9px] md:text-xs text-slate-400 line-through">UVP: ${p.oldPrice.toFixed(2)}€</div>` : ''}
                 </div>
-                
-                <a href="${p.url}" target="_blank" class="btn bg-slate-800 hover:bg-slate-700 text-white btn-block rounded font-bold border-none transition-colors">
+                <a href="${p.url}" target="_blank" class="btn bg-slate-800 hover:bg-slate-700 text-white btn-block btn-xs md:btn-md rounded font-bold border-none mt-auto">
                     Zum Angebot
                 </a>
             </div>
@@ -79,7 +76,7 @@ function renderPagination() {
     
     let html = '';
     for(let i=1; i<=total; i++) {
-        html += `<button onclick="changePage(${i})" class="btn btn-sm md:btn-md ${i===currentPage ? 'btn-primary' : 'btn-ghost text-slate-400 font-bold'} rounded">${i}</button>`;
+        html += `<button onclick="changePage(${i})" class="btn btn-xs md:btn-sm ${i===currentPage ? 'btn-primary' : 'btn-ghost text-slate-400 font-bold'} rounded">${i}</button>`;
     }
     container.innerHTML = html;
 }
