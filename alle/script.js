@@ -1,189 +1,160 @@
-console.log("🔥 script.js v11 ist aktiv!");
+/**
+ * MioDeals Logic v12
+ * Features: Debounced Search, Auto-Discount, Pagination, Sorting
+ */
 
 let allProducts = [];
 let filteredProducts = [];
 let currentPage = 1;
-const pageSize = 20;
+const pageSize = 12;
 
-// PRODUKTE LADEN
+// 1. Initiales Laden der Daten
 async function loadProducts() {
     try {
+        // Pfad zur JSON (Falls lokal getestet wird, Pfad anpassen)
         const response = await fetch("/dealsgalaxy/products.json");
-        const products = await response.json();
-
-        allProducts = products.slice();
-        filteredProducts = allProducts.slice();
-
+        if (!response.ok) throw new Error("Netzwerkantwort war nicht ok");
+        
+        allProducts = await response.json();
         applyAllAndRender();
         setupEventListeners();
     } catch (error) {
-        document.getElementById("product-grid").innerHTML =
-            `<p class="text-center text-error">Fehler beim Laden der Angebote.</p>`;
+        console.error("Fehler beim Laden:", error);
+        document.getElementById("product-grid").innerHTML = `
+            <div class="col-span-full text-center py-20 bg-white rounded-3xl shadow-sm">
+                <p class="text-error font-bold">Ups! Die Angebote konnten nicht geladen werden.</p>
+                <p class="text-sm text-gray-400">Prüfe deine Internetverbindung oder versuche es später erneut.</p>
+            </div>`;
     }
 }
 
-// EVENTS
+// 2. Event Listener für Interaktionen
 function setupEventListeners() {
-    document.getElementById("search-input").addEventListener("input", () => {
-        currentPage = 1;
-        applyAllAndRender();
+    let searchTimeout;
+    
+    // Suche mit "Debouncing" (Wartet 300ms nach dem Tippen)
+    document.getElementById("search-input").addEventListener("input", (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            currentPage = 1;
+            applyAllAndRender();
+        }, 300);
     });
 
+    // Sortierung
     document.getElementById("sort-select").addEventListener("change", () => {
         currentPage = 1;
         applyAllAndRender();
     });
 }
 
-// FILTER + SORTIERUNG + RENDER
+// 3. Filterung und Sortierung anwenden
 function applyAllAndRender() {
-    const searchTerm = document.getElementById("search-input").value.trim().toLowerCase();
-    const sortMode = document.getElementById("sort-select").value;
+    const search = document.getElementById("search-input").value.toLowerCase();
+    const sort = document.getElementById("sort-select").value;
 
-    filteredProducts = filterProducts(allProducts, searchTerm);
-    sortProducts(filteredProducts, sortMode);
+    // Filtern nach Titel oder Kategorie
+    filteredProducts = allProducts.filter(p => 
+        p.title.toLowerCase().includes(search) || 
+        (p.category && p.category.toLowerCase().includes(search))
+    );
 
-    renderCurrentPage();
+    // Anzahl der Deals aktualisieren
+    document.getElementById("deal-count").innerText = filteredProducts.length;
+
+    // Sortieren der gefilterten Liste
+    if (sort === "price-asc") {
+        filteredProducts.sort((a, b) => a.currentPrice - b.currentPrice);
+    } else if (sort === "price-desc") {
+        filteredProducts.sort((a, b) => b.currentPrice - a.currentPrice);
+    } else if (sort === "discount-desc") {
+        filteredProducts.sort((a, b) => {
+            const discA = a.discount || (a.oldPrice ? Math.round(100 - (a.currentPrice / a.oldPrice * 100)) : 0);
+            const discB = b.discount || (b.oldPrice ? Math.round(100 - (b.currentPrice / b.oldPrice * 100)) : 0);
+            return discB - discA;
+        });
+    }
+
+    renderGrid();
     renderPagination();
 }
 
-// FILTER
-function filterProducts(products, searchTerm) {
-    if (!searchTerm) return products.slice();
-
-    return products.filter(p => {
-        return (
-            (p.title || "").toLowerCase().includes(searchTerm) ||
-            (p.category || "").toLowerCase().includes(searchTerm) ||
-            (p.description || "").toLowerCase().includes(searchTerm) ||
-            (p.brand || "").toLowerCase().includes(searchTerm)
-        );
-    });
-}
-
-// SORTIERUNG
-function sortProducts(products, mode) {
-    if (mode === "empfohlen") return;
-
-    products.sort((a, b) => {
-        const priceA = a.currentPrice ?? 0;
-        const priceB = b.currentPrice ?? 0;
-        const discountA = a.discount ?? 0;
-        const discountB = b.discount ?? 0;
-        const ratingA = a.rating ?? 0;
-        const ratingB = b.rating ?? 0;
-
-        switch (mode) {
-            case "price-asc": return priceA - priceB;
-            case "price-desc": return priceB - priceA;
-            case "discount-desc": return discountB - discountA;
-            case "rating-desc": return ratingB - ratingA;
-        }
-    });
-}
-
-// PRODUKTGRID RENDERN (OPTIMIERT)
-function renderCurrentPage() {
+// 4. Das Gitter mit Karten füllen
+function renderGrid() {
     const grid = document.getElementById("product-grid");
-    grid.innerHTML = "";
+    const start = (currentPage - 1) * pageSize;
+    const items = filteredProducts.slice(start, start + pageSize);
 
-    if (!filteredProducts.length) {
-        grid.innerHTML = `<p class="text-center text-base-content/70 col-span-full">Keine passenden Angebote.</p>`;
+    if (items.length === 0) {
+        grid.innerHTML = `<p class="col-span-full text-center py-20 text-gray-400">Keine Angebote zu deiner Suche gefunden.</p>`;
         return;
     }
 
-    const start = (currentPage - 1) * pageSize;
-    const end = start + pageSize;
-    const pageProducts = filteredProducts.slice(start, end);
+    grid.innerHTML = items.map(p => {
+        // Rabatt automatisch berechnen, falls nicht in JSON vorhanden
+        const disc = p.discount || (p.oldPrice ? Math.round(100 - (p.currentPrice / p.oldPrice * 100)) : 0);
+        const ratingStars = p.rating ? "★".repeat(Math.round(p.rating)) + "☆".repeat(5 - Math.round(p.rating)) : "";
 
-    pageProducts.forEach(p => {
-        const card = document.createElement("div");
-        card.className =
-            "card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl";
-
-        card.innerHTML = `
-            <figure class="bg-base-200 rounded-t-xl relative">
-               <img src="${p.image}" 
-                    class="rounded-t-xl object-cover w-full h-32 sm:h-36 md:h-48 lg:h-52" />
-
-                ${
-                    p.discount
-                        ? `<div class="badge badge-secondary absolute top-3 right-3 text-sm py-3 px-4 rounded-full">-${p.discount}%</div>`
-                        : ""
-                }
+        return `
+        <article class="card bg-white shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 group rounded-3xl overflow-hidden">
+            <figure class="relative p-6 bg-white overflow-hidden">
+                ${disc > 0 ? `<div class="absolute top-4 left-4 badge badge-secondary font-black border-none z-10 px-4 py-3 shadow-md">-${disc}%</div>` : ''}
+                <img src="${p.image}" alt="${p.title}" class="product-img h-48 w-full object-contain" loading="lazy" />
             </figure>
-
-            <div class="card-body flex flex-col justify-between">
-                <h2 class="font-bold text-base line-clamp-2 min-h-[3rem]">${p.title}</h2>
-
-                <div>
-                    <div class="flex items-baseline gap-2 mt-1">
-                        <span class="text-xl font-bold text-primary">${p.currentPrice.toFixed(2)} €</span>
-                        ${
-                            p.oldPrice
-                                ? `<span class="text-sm line-through text-gray-400">${p.oldPrice.toFixed(2)} €</span>`
-                                : ""
-                        }
-                    </div>
-
-                    <div class="flex items-center gap-1 text-yellow-500 text-sm mt-1">
-                        ${p.rating ? "★".repeat(Math.round(p.rating)) : ""}
-                        <span class="text-gray-500 ml-1">${p.rating ? p.rating.toFixed(1) : ""}</span>
-                    </div>
+            
+            <div class="card-body p-6">
+                <h2 class="font-bold text-sm h-10 line-clamp-2 leading-tight mb-4 group-hover:text-primary transition-colors">${p.title}</h2>
+                
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-2xl font-black text-primary">${p.currentPrice.toFixed(2)}€</span>
+                    ${p.oldPrice ? `<span class="text-sm line-through text-gray-300 font-medium">${p.oldPrice.toFixed(2)}€</span>` : ''}
+                </div>
+                
+                <div class="flex items-center justify-between mb-4">
+                    <div class="text-yellow-400 text-xs tracking-tighter">${ratingStars}</div>
+                    <span class="text-[10px] text-gray-300 font-bold uppercase tracking-widest">${new Date().toLocaleDateString('de-DE')}</span>
                 </div>
 
-                <div class="card-actions justify-end mt-4">
-                    <a href="${p.url}" target="_blank" class="btn btn-primary w-full h-12 text-lg rounded-xl">
+                <div class="card-actions">
+                    <a href="${p.url}" target="_blank" class="btn btn-primary btn-block rounded-xl text-white font-bold no-animation shadow-lg shadow-blue-100 hover:shadow-blue-300">
                         Zum Angebot
                     </a>
                 </div>
             </div>
+        </article>
         `;
-
-        grid.appendChild(card);
-    });
+    }).join('');
 }
 
-// PAGINATION
+// 5. Pagination Buttons erstellen
 function renderPagination() {
     const container = document.getElementById("pagination");
-    container.innerHTML = "";
-
     const totalPages = Math.ceil(filteredProducts.length / pageSize);
-    if (totalPages <= 1) return;
-
-    const createBtn = (label, page, disabled = false, active = false) => {
-        const btn = document.createElement("button");
-        btn.textContent = label;
-
-        btn.className =
-            "btn btn-sm rounded-full px-4 " +
-            (active ? "btn-primary" : "btn-outline btn-primary");
-
-        if (disabled) btn.classList.add("btn-disabled");
-        else
-            
-    btn.addEventListener("click", () => {
-    currentPage = page;
-    renderCurrentPage();
-    renderPagination();
-
-    setTimeout(() => {
-        document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
-        document.body.scrollTo({ top: 0, behavior: "smooth" });
-    }, 10);
-});
-
-        return btn;
-    };
-
-    container.appendChild(createBtn("«", Math.max(1, currentPage - 1), currentPage === 1));
-
-    for (let p = 1; p <= totalPages; p++) {
-        container.appendChild(createBtn(p, p, false, p === currentPage));
+    
+    if (totalPages <= 1) {
+        container.innerHTML = "";
+        return;
     }
 
-    container.appendChild(createBtn("»", Math.min(totalPages, currentPage + 1), currentPage === totalPages));
+    let html = '';
+    for (let i = 1; i <= totalPages; i++) {
+        html += `
+            <button onclick="changePage(${i})" 
+                class="btn btn-sm md:btn-md rounded-xl ${i === currentPage ? 'btn-primary text-white shadow-md' : 'btn-ghost text-gray-500'}">
+                ${i}
+            </button>`;
+    }
+    container.innerHTML = html;
 }
 
+// 6. Seitenwechsel-Funktion
+window.changePage = (p) => {
+    currentPage = p;
+    // Sanfter Scroll nach oben
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    renderGrid();
+    renderPagination();
+};
+
+// Programm starten
 loadProducts();
