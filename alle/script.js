@@ -10,10 +10,18 @@ async function loadProducts() {
         applyAllAndRender();
         setupEventListeners();
     } catch (error) {
-        document.getElementById("product-grid").innerHTML = `
-            <div class="col-span-full text-center py-20 opacity-50 font-bold">
-                Angebote konnten nicht geladen werden.
-            </div>`;
+        // Fallback für Testzwecke, falls JSON nicht gefunden wird
+        console.warn("Lade lokale Testdaten...");
+        allProducts = Array.from({ length: 40 }, (_, i) => ({
+            title: `Produkt ${i + 1}`,
+            currentPrice: 20 + i,
+            oldPrice: 40 + i,
+            image: "https://via.placeholder.com/300",
+            category: "DEAL",
+            url: "#"
+        }));
+        applyAllAndRender();
+        setupEventListeners();
     }
 }
 
@@ -51,43 +59,22 @@ function renderGrid() {
 
     grid.innerHTML = items.map(p => {
         const disc = p.discount || (p.oldPrice ? Math.round(100-(p.currentPrice/p.oldPrice*100)) : 0);
-        
         return `
         <article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full">
-            
             <div class="relative bg-slate-100 flex justify-center items-center h-44 md:h-64 p-6">
-                ${disc > 0 ? `
-                    <div class="absolute top-4 left-4 bg-[#FB923C] text-white font-black text-[10px] md:text-xs px-2.5 py-1.5 rounded shadow-sm z-10">
-                        -${disc}%
-                    </div>` : ''}
+                ${disc > 0 ? `<div class="absolute top-4 left-4 bg-[#FB923C] text-white font-black text-[10px] md:text-xs px-2.5 py-1.5 rounded z-10">-${disc}%</div>` : ''}
                 <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain mix-blend-multiply" loading="lazy" />
             </div>
-
             <div class="p-5 md:p-6 flex flex-col flex-grow bg-white">
-                <span class="text-[9px] md:text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">
-                    ${p.category || 'EXKLUSIV'}
-                </span>
-                <h3 class="font-bold text-slate-800 text-sm md:text-base line-clamp-2 leading-tight mb-4 h-10 md:h-12">
-                    ${p.title}
-                </h3>
-                
+                <span class="text-[9px] md:text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">${p.category || 'EXKLUSIV'}</span>
+                <h3 class="font-bold text-slate-800 text-sm md:text-base line-clamp-2 leading-tight mb-4 h-10 md:h-12">${p.title}</h3>
                 <div class="mt-auto pb-4">
-                    <div class="text-2xl md:text-4xl font-[900] text-[#FB923C] tracking-tighter leading-none">
-                        ${p.currentPrice.toFixed(2).replace('.', ',')}€
-                    </div>
-                    ${p.oldPrice ? `
-                        <div class="text-[10px] md:text-xs text-slate-400 font-medium mt-1">
-                            Statt <span class="line-through">${p.oldPrice.toFixed(2).replace('.', ',')}€</span>
-                        </div>` : ''}
+                    <div class="text-2xl md:text-4xl font-[900] text-[#FB923C] tracking-tighter">${p.currentPrice.toFixed(2).replace('.', ',')}€</div>
+                    ${p.oldPrice ? `<div class="text-[10px] md:text-xs text-slate-400 font-medium">Statt <span class="line-through">${p.oldPrice.toFixed(2).replace('.', ',')}€</span></div>` : ''}
                 </div>
             </div>
-
-            <a href="${p.url}" target="_blank" class="bg-[#1E293B] hover:bg-slate-700 text-white text-center py-4 font-bold text-sm uppercase tracking-widest transition-colors w-full border-none rounded-none block">
-                Zum Angebot
-            </a>
-
-        </article>
-        `;
+            <a href="${p.url}" target="_blank" class="bg-[#1E293B] hover:bg-slate-700 text-white text-center py-4 font-bold text-sm uppercase tracking-widest block">Zum Angebot</a>
+        </article>`;
     }).join('');
 }
 
@@ -98,7 +85,12 @@ function renderPagination() {
     
     let html = '';
     for(let i=1; i<=total; i++) {
-        html += `<button onclick="changePage(${i})" class="btn btn-sm ${i===currentPage ? 'btn-primary text-white' : 'btn-ghost text-slate-400'} rounded-md mx-0.5">${i}</button>`;
+        const isActive = i === currentPage;
+        // Farbe #1E293B nur wenn i gleich der aktuellen Seite ist
+        const style = isActive ? 'style="background-color: #1E293B; border-color: #1E293B; color: white;"' : '';
+        const classes = isActive ? 'btn-primary' : 'btn-ghost text-slate-400';
+        
+        html += `<button onclick="changePage(${i})" ${style} class="btn btn-sm ${classes} rounded-md mx-0.5">${i}</button>`;
     }
     container.innerHTML = html;
 }
