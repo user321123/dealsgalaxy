@@ -31,10 +31,10 @@
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
 
-    <!-- Header ohne container → volle Breite möglich -->
-    <div class="navbar mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4 w-full max-w-[1600px]">
+    <!-- Header ohne max-width, damit Mobile-Breakpoints funktionieren -->
+    <div class="navbar mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4 w-full">
 
-        <!-- LOGO – bleibt unverändert -->
+        <!-- LOGO -->
         <div class="flex-none">
             <a href="../index.html" 
                 class="text-3xl lg:text-5xl font-[900] tracking-tighter text-[#1E293B] select-none inline-flex items-center">
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <!-- ICON – bleibt unverändert -->
+        <!-- ICON -->
         <div class="flex-none hidden lg:flex justify-end text-slate-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -67,9 +67,9 @@
 
     </div>
 
-    <!-- NAV ohne container → Header wirkt nicht mehr schmal -->
+    <!-- NAV -->
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
-        <div class="mx-auto flex justify-center gap-2 py-3 px-4 w-full max-w-[1600px]">
+        <div class="mx-auto flex justify-center gap-2 py-3 px-4 w-full">
             <a href="../alle/" class="btn btn-sm rounded px-6 shadow-sm text-white border-none" style="background-color: #1E293B;">Alle Deals</a>
             <a href="../gaming/" class="btn btn-ghost btn-sm rounded px-6 text-slate-500 font-bold uppercase text-[10px] tracking-widest">Gaming</a>
             <a href="../kueche/" class="btn btn-ghost btn-sm rounded px-6 text-slate-500 font-bold uppercase text-[10px] tracking-widest">Küche</a>
@@ -110,3 +110,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
