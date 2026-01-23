@@ -31,7 +31,7 @@
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
 
-    <!-- container entfernt → Suchleiste kann endlich breiter werden -->
+    <!-- Header ohne container → volle Breite möglich -->
     <div class="navbar mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4 w-full max-w-[1600px]">
 
         <!-- LOGO – bleibt unverändert -->
@@ -64,8 +64,9 @@
 
     </div>
 
+    <!-- NAV ohne container → Header wirkt nicht mehr schmal -->
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
-        <div class="container mx-auto flex justify-center gap-2 py-3 px-4">
+        <div class="mx-auto flex justify-center gap-2 py-3 px-4 w-full max-w-[1600px]">
             <a href="../alle/" class="btn btn-sm rounded px-6 shadow-sm text-white border-none" style="background-color: #1E293B;">Alle Deals</a>
             <a href="../gaming/" class="btn btn-ghost btn-sm rounded px-6 text-slate-500 font-bold uppercase text-[10px] tracking-widest">Gaming</a>
             <a href="../kueche/" class="btn btn-ghost btn-sm rounded px-6 text-slate-500 font-bold uppercase text-[10px] tracking-widest">Küche</a>
