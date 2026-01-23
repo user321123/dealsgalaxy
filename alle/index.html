@@ -31,19 +31,20 @@
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="navbar container mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4">
-        <div class="flex-1">
-            
-            <a href="../index.html" 
-   class="text-3xl lg:text-5xl font-[900] tracking-tighter text-[#1E293B] select-none inline-flex items-center">
-    M
-    <span class="relative inline-block">
-        i<span class="absolute top-[-0.45em] left-0 w-full text-center text-[#FB923C] leading-[1]">.</span>
-    </span>
-    <span class="text-[#FB923C]">o</span> Deals
-</a>
 
+        <!-- LOGO – bleibt unverändert -->
+        <div class="flex-none">
+            <a href="../index.html" 
+                class="text-3xl lg:text-5xl font-[900] tracking-tighter text-[#1E293B] select-none inline-flex items-center">
+                M
+                <span class="relative inline-block">
+                    i<span class="absolute top-[-0.45em] left-0 w-full text-center text-[#FB923C] leading-[1]">.</span>
+                </span>
+                <span class="text-[#FB923C]">o</span> Deals
+            </a>
         </div>
-        
+
+        <!-- SUCHLEISTE – jetzt breiter auf Desktop -->
         <div class="flex-none w-full lg:w-[800px] lg:max-w-[800px]">
             <div class="relative">
                 <input id="search-input" type="text" placeholder="Angebote durchsuchen..." 
@@ -52,11 +53,13 @@
             </div>
         </div>
 
-        <div class="flex-1 hidden lg:flex justify-end text-slate-800">
+        <!-- ICON – bleibt unverändert -->
+        <div class="flex-none hidden lg:flex justify-end text-slate-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
         </div>
+
     </div>
 
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
