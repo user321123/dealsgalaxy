@@ -30,7 +30,9 @@
 <body class="bg-base-200 min-h-screen flex flex-col font-sans">
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="navbar container mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4">
+
+    <!-- WICHTIG: container entfernt → volle Breite möglich -->
+    <div class="navbar mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4 w-full max-w-[1600px]">
 
         <!-- LOGO – bleibt unverändert -->
         <div class="flex-none">
@@ -44,8 +46,8 @@
             </a>
         </div>
 
-        <!-- SUCHLEISTE – jetzt breiter auf Desktop -->
-        <div class="flex-none w-full lg:w-[800px] lg:max-w-[800px]">
+        <!-- SUCHLEISTE – jetzt wirklich breit -->
+        <div class="flex-none w-full lg:w-[900px] lg:max-w-[900px]">
             <div class="relative">
                 <input id="search-input" type="text" placeholder="Angebote durchsuchen..." 
                        class="input input-bordered w-full rounded-md bg-slate-50 focus:bg-white pr-12 h-12 border-slate-200" />
