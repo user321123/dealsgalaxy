@@ -1,90 +1,361 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="miotheme">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MioDeals – Deine Deal-Plattform</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            daisyui: {
-                themes: [{
-                    miotheme: {
-                        "primary": "#3A5CC4",
-                        "secondary": "#FB923C",
-                        "base-100": "#ffffff",
-                        "base-200": "#F8FAFC",
-                    },
-                }],
-            },
-        }
-    </script>
+
     <style>
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .product-card { transition: all 0.3s ease; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-        .text-orange-mio { color: #FB923C; }
+        /* ===========================
+           FARBSYSTEM – HIER ALLES ÄNDERN
+        ============================ */
+        :root {
+            --primary: #3A5CC4;
+            --secondary: #FB923C;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --white: #ffffff;
+            --text: #1E293B;
+            --muted: #94A3B8;
+        }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--white);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            .navbar {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .logo {
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--dark);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .logo .dot {
+            position: absolute;
+            top: -0.45em;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 900;
+        }
+
+        /* SEARCH */
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 12px 40px 12px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #f1f5f9;
+            font-size: 16px;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-weight: bold;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: var(--white);
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+        }
+
+        nav a {
+            padding: 6px 20px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--muted);
+        }
+
+        nav a.active {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        /* MAIN */
+        main {
+            flex-grow: 1;
+            padding: 32px 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .hash {
+            width: 32px;
+            height: 32px;
+            background: var(--dark);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: var(--white);
+        }
+
+        /* GRID */
+        #product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (min-width: 768px) {
+            #product-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            #product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* PRODUCT CARD */
+        .product-card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            position: relative;
+            background: #f1f5f9;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .category {
+            font-size: 10px;
+            font-weight: bold;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            height: 36px;
+            overflow: hidden;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--secondary);
+        }
+
+        .old-price {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .cta {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        /* PAGINATION */
+        #pagination {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 40px 0;
+        }
+
+        .page-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .page-btn.active {
+            background: var(--dark);
+            border-color: var(--dark);
+            color: var(--white);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--white);
+            border-top: 1px solid #e2e8f0;
+            padding: 40px 16px;
+            margin-top: auto;
+        }
+
+        footer .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: bold;
+        }
     </style>
 </head>
-<body class="bg-base-200 min-h-screen flex flex-col font-sans">
 
-<header class="bg-white shadow-sm sticky top-0 z-50">
+<body>
 
-    <!-- Header ohne max-width, damit Mobile-Breakpoints funktionieren -->
-    <div class="navbar mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4 w-full">
+<header>
+    <div class="navbar">
+        <a href="../index.html" class="logo">
+            M
+            <span class="dot">.</span>
+            <span style="color: var(--secondary)">o</span> Deals
+        </a>
 
-        <!-- LOGO -->
-        <div class="flex-none">
-            <a href="../index.html" 
-                class="text-3xl lg:text-5xl font-[900] tracking-tighter text-[#1E293B] select-none inline-flex items-center">
-                M
-                <span class="relative inline-block">
-                    i<span class="absolute top-[-0.45em] left-0 w-full text-center text-[#FB923C] leading-[1]">.</span>
-                </span>
-                <span class="text-[#FB923C]">o</span> Deals
-            </a>
+        <div class="search-wrapper">
+            <input id="search-input" class="search-input" type="text" placeholder="Angebote durchsuchen...">
+            <div class="search-icon">⌕</div>
         </div>
-
-        <!-- SUCHLEISTE – Smartphone breiter & mittig, Desktop 900px -->
-        <div class="flex-none w-full lg:w-[900px] lg:max-w-[900px]">
-            <div class="relative">
-                <input id="search-input" type="text" placeholder="Angebote durchsuchen..." 
-                       class="input input-bordered 
-                              w-full max-w-[500px] mx-auto 
-                              lg:w-[900px] lg:max-w-[900px] 
-                              rounded-md bg-slate-50 focus:bg-white pr-12 h-12 border-slate-200" />
-                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">⌕</div>
-            </div>
-        </div>
-
-        <!-- ICON -->
-        <div class="flex-none hidden lg:flex justify-end text-slate-800">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </div>
-
     </div>
 
-    <!-- NAV -->
-    <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
-        <div class="mx-auto flex justify-center gap-2 py-3 px-4 w-full">
-            <a href="../alle/" class="btn btn-sm rounded px-6 shadow-sm text-white border-none" style="background-color: #1E293B;">Alle Deals</a>
-            <a href="../gaming/" class="btn btn-ghost btn-sm rounded px-6 text-slate-500 font-bold uppercase text-[10px] tracking-widest">Gaming</a>
-            <a href="../kueche/" class="btn btn-ghost btn-sm rounded px-6 text-slate-500 font-bold uppercase text-[10px] tracking-widest">Küche</a>
-            <a href="../technik/" class="btn btn-ghost btn-sm rounded px-6 text-slate-500 font-bold uppercase text-[10px] tracking-widest">Technik</a>
+    <nav>
+        <div class="nav-links">
+            <a href="../alle/" class="active">Alle Deals</a>
+            <a href="../gaming/">Gaming</a>
+            <a href="../kueche/">Küche</a>
+            <a href="../technik/">Technik</a>
         </div>
     </nav>
 </header>
 
-<main class="container mx-auto px-2 md:px-4 py-8 flex-grow">
-    <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 px-2">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-slate-800 rounded flex items-center justify-center text-white font-bold text-xs">#</div>
-            <h1 class="text-2xl font-bold text-slate-800 tracking-tight uppercase">Angebote</h1>
+<main>
+    <div class="section-header">
+        <div class="section-title">
+            <div class="hash">#</div>
+            <h1>Angebote</h1>
         </div>
-        <select id="sort-select" class="select select-bordered select-sm rounded bg-white border-slate-200">
+
+        <select id="sort-select">
             <option value="empfohlen">Sortieren: Empfohlen</option>
             <option value="price-asc">Preis: Aufsteigend</option>
             <option value="price-desc">Preis: Absteigend</option>
@@ -92,17 +363,16 @@
         </select>
     </div>
 
-    <div id="product-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-8"></div>
-
-    <div id="pagination" class="flex justify-center items-center gap-2 py-16"></div>
+    <div id="product-grid"></div>
+    <div id="pagination"></div>
 </main>
 
-<footer class="bg-white border-t py-12 mt-auto">
-    <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p class="text-sm text-slate-400 font-medium">© 2025 MioDeals – Alle Rechte vorbehalten</p>
-        <div class="flex gap-10 text-sm font-bold text-slate-700">
-            <a href="../impressum.html" class="hover:text-orange-500 transition-colors">Impressum</a>
-            <a href="../datenschutz.html" class="hover:text-orange-500 transition-colors">Datenschutz</a>
+<footer>
+    <div class="footer-inner">
+        <p>© 2025 MioDeals – Alle Rechte vorbehalten</p>
+        <div>
+            <a href="../impressum.html">Impressum</a> |
+            <a href="../datenschutz.html">Datenschutz</a>
         </div>
     </div>
 </footer>
