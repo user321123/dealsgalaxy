@@ -61,7 +61,7 @@ function renderGrid() {
         return `
         <article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full">
             <div class="relative bg-slate-100 flex justify-center items-center h-44 md:h-64 p-6">
-                ${disc > 0 ? `<div class="absolute top-4 left-4 bg-[var(--mio-secondary)] text-white font-black text-[10px] md:text-xs px-2.5 py-1.5 rounded z-10">-${disc}%</div>` : ''}
+                ${disc > 0 ? `<div class="absolute top-4 left-4 px-2.5 py-1.5 bg-[var(--mio-secondary)] text-white font-black text-[10px] md:text-xs rounded z-10">-${disc}%</div>` : ''}
                 <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain mix-blend-multiply" loading="lazy" />
             </div>
             <div class="p-5 md:p-6 flex flex-col flex-grow bg-white">
@@ -72,7 +72,10 @@ function renderGrid() {
                     ${p.oldPrice ? `<div class="text-[10px] md:text-xs text-slate-400 font-medium">Statt <span class="line-through">${p.oldPrice.toFixed(2).replace('.', ',')}€</span></div>` : ''}
                 </div>
             </div>
-            <a href="${p.url}" target="_blank" class="bg-[var(--mio-dark)] hover:bg-slate-700 text-white text-center py-4 font-bold text-sm uppercase tracking-widest block">Zum Angebot</a>
+            <a href="${p.url}" target="_blank"
+               class="bg-mio-dark hover:bg-slate-700 text-white text-center py-4 font-bold text-sm uppercase tracking-widest block">
+               Zum Angebot
+            </a>
         </article>`;
     }).join('');
 }
@@ -81,23 +84,25 @@ function renderPagination() {
     const container = document.getElementById("pagination");
     const total = Math.ceil(filteredProducts.length / pageSize);
     if(total <= 1) { container.innerHTML = ""; return; }
-    
+
     let html = '';
     for(let i=1; i<=total; i++) {
         const isActive = i === currentPage;
-        const style = isActive ? 'style="background-color: var(--mio-dark); border-color: var(--mio-dark); color: white;"' : '';
-        const classes = isActive ? 'btn-primary' : 'btn-ghost text-slate-400';
-        
-        html += `<button onclick="changePage(${i})" ${style} class="btn btn-sm ${classes} rounded-md mx-0.5">${i}</button>`;
+        html += `
+            <button onclick="changePage(${i})"
+                    class="px-3 py-1 rounded-md border text-sm font-bold tracking-widest
+                           ${isActive ? 'bg-mio-dark border-mio-dark text-white' : 'bg-white border-slate-300 text-slate-500 hover:text-mio-secondary'}">
+                ${i}
+            </button>`;
     }
     container.innerHTML = html;
 }
 
-window.changePage = (p) => { 
-    currentPage = p; 
-    window.scrollTo({top: 0, behavior: 'smooth'}); 
-    renderGrid(); 
-    renderPagination(); 
+window.changePage = (p) => {
+    currentPage = p;
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    renderGrid();
+    renderPagination();
 };
 
 loadProducts();
