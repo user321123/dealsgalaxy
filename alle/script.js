@@ -7,11 +7,7 @@ async function loadProducts() {
     try {
         const response = await fetch("/dealsgalaxy/products.json");
         allProducts = await response.json();
-        applyAllAndRender();
-        setupEventListeners();
     } catch (error) {
-        // Fallback für Testzwecke, falls JSON nicht gefunden wird
-        console.warn("Lade lokale Testdaten...");
         allProducts = Array.from({ length: 40 }, (_, i) => ({
             title: `Produkt ${i + 1}`,
             currentPrice: 20 + i,
@@ -20,34 +16,45 @@ async function loadProducts() {
             category: "DEAL",
             url: "#"
         }));
-        applyAllAndRender();
-        setupEventListeners();
     }
+
+    applyAllAndRender();
+    setupEventListeners();
 }
 
 function setupEventListeners() {
     let timeout;
     document.getElementById("search-input").addEventListener("input", () => {
         clearTimeout(timeout);
-        timeout = setTimeout(() => { currentPage = 1; applyAllAndRender(); }, 300);
+        timeout = setTimeout(() => {
+            currentPage = 1;
+            applyAllAndRender();
+        }, 300);
     });
-    document.getElementById("sort-select").addEventListener("change", () => { applyAllAndRender(); });
+
+    document.getElementById("sort-select").addEventListener("change", () => {
+        currentPage = 1;
+        applyAllAndRender();
+    });
 }
 
 function applyAllAndRender() {
     const search = document.getElementById("search-input").value.toLowerCase();
     const sort = document.getElementById("sort-select").value;
 
-    filteredProducts = allProducts.filter(p => p.title.toLowerCase().includes(search));
+    filteredProducts = allProducts.filter(p =>
+        p.title.toLowerCase().includes(search)
+    );
 
-    if (sort === "price-asc") filteredProducts.sort((a,b) => a.currentPrice - b.currentPrice);
-    if (sort === "price-desc") filteredProducts.sort((a,b) => b.currentPrice - a.currentPrice);
+    if (sort === "price-asc") filteredProducts.sort((a, b) => a.currentPrice - b.currentPrice);
+    if (sort === "price-desc") filteredProducts.sort((a, b) => b.currentPrice - a.currentPrice);
     if (sort === "discount-desc") {
-        filteredProducts.sort((a,b) => {
-            const getD = x => x.discount || (x.oldPrice ? Math.round(100-(x.currentPrice/x.oldPrice*100)) : 0);
+        filteredProducts.sort((a, b) => {
+            const getD = x => x.discount || (x.oldPrice ? Math.round(100 - (x.currentPrice / x.oldPrice * 100)) : 0);
             return getD(b) - getD(a);
         });
     }
+
     renderGrid();
     renderPagination();
 }
@@ -58,48 +65,56 @@ function renderGrid() {
     const items = filteredProducts.slice(start, start + pageSize);
 
     grid.innerHTML = items.map(p => {
-        const disc = p.discount || (p.oldPrice ? Math.round(100-(p.currentPrice/p.oldPrice*100)) : 0);
+        const disc = p.discount || (p.oldPrice ? Math.round(100 - (p.currentPrice / p.oldPrice * 100)) : 0);
+
         return `
-        <article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full">
-            <div class="relative bg-slate-100 flex justify-center items-center h-44 md:h-64 p-6">
-                ${disc > 0 ? `<div class="absolute top-4 left-4 bg-[#FB923C] text-white font-black text-[10px] md:text-xs px-2.5 py-1.5 rounded z-10">-${disc}%</div>` : ''}
-                <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain mix-blend-multiply" loading="lazy" />
+        <article class="product-card">
+            <div class="product-img">
+                ${disc > 0 ? `<div class="badge">-${disc}%</div>` : ""}
+                <img src="${p.image}" alt="${p.title}" style="max-width:100%; max-height:100%; object-fit:contain;">
             </div>
-            <div class="p-5 md:p-6 flex flex-col flex-grow bg-white">
-                <span class="text-[9px] md:text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">${p.category || 'EXKLUSIV'}</span>
-                <h3 class="font-bold text-slate-800 text-sm md:text-base line-clamp-2 leading-tight mb-4 h-10 md:h-12">${p.title}</h3>
-                <div class="mt-auto pb-4">
-                    <div class="text-2xl md:text-4xl font-[900] text-[#FB923C] tracking-tighter">${p.currentPrice.toFixed(2).replace('.', ',')}€</div>
-                    ${p.oldPrice ? `<div class="text-[10px] md:text-xs text-slate-400 font-medium">Statt <span class="line-through">${p.oldPrice.toFixed(2).replace('.', ',')}€</span></div>` : ''}
+
+            <div class="product-info">
+                <span class="category">${p.category || "EXKLUSIV"}</span>
+                <h3 class="title">${p.title}</h3>
+
+                <div style="margin-top:auto;">
+                    <div class="price">${p.currentPrice.toFixed(2).replace(".", ",")}€</div>
+                    ${p.oldPrice ? `<div class="old-price">Statt <span style="text-decoration:line-through;">${p.oldPrice.toFixed(2).replace(".", ",")}€</span></div>` : ""}
                 </div>
             </div>
-            <a href="${p.url}" target="_blank" class="bg-[#1E293B] hover:bg-slate-700 text-white text-center py-4 font-bold text-sm uppercase tracking-widest block">Zum Angebot</a>
+
+            <a href="${p.url}" target="_blank" class="cta">Zum Angebot</a>
         </article>`;
-    }).join('');
+    }).join("");
 }
 
 function renderPagination() {
     const container = document.getElementById("pagination");
     const total = Math.ceil(filteredProducts.length / pageSize);
-    if(total <= 1) { container.innerHTML = ""; return; }
-    
-    let html = '';
-    for(let i=1; i<=total; i++) {
-        const isActive = i === currentPage;
-        // Farbe #1E293B nur wenn i gleich der aktuellen Seite ist
-        const style = isActive ? 'style="background-color: #1E293B; border-color: #1E293B; color: white;"' : '';
-        const classes = isActive ? 'btn-primary' : 'btn-ghost text-slate-400';
-        
-        html += `<button onclick="changePage(${i})" ${style} class="btn btn-sm ${classes} rounded-md mx-0.5">${i}</button>`;
+
+    if (total <= 1) {
+        container.innerHTML = "";
+        return;
     }
+
+    let html = "";
+    for (let i = 1; i <= total; i++) {
+        html += `
+            <button class="page-btn ${i === currentPage ? "active" : ""}" onclick="changePage(${i})">
+                ${i}
+            </button>`;
+    }
+
     container.innerHTML = html;
 }
 
-window.changePage = (p) => { 
-    currentPage = p; 
-    window.scrollTo({top: 0, behavior: 'smooth'}); 
-    renderGrid(); 
-    renderPagination(); 
+window.changePage = p => {
+    currentPage = p;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    renderGrid();
+    renderPagination();
 };
 
 loadProducts();
+
