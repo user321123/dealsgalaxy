@@ -58,7 +58,8 @@
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
 
-    <div class="navbar mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4 w-full">
+    <!-- DESKTOP: Logo + Suche horizontal -->
+    <div class="navbar mx-auto px-4 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 w-full">
 
         <!-- LOGO -->
         <div class="flex-none">
@@ -73,7 +74,7 @@
         </div>
 
         <!-- SUCHLEISTE -->
-        <div class="search-wrapper flex-none w-full lg:w-[900px] lg:max-w-[900px]">
+        <div class="search-wrapper flex-grow lg:max-w-[900px]">
             <div class="relative">
                 <input id="search-input" type="text" placeholder="Angebote durchsuchen..."
                        class="w-full h-12 px-4 pr-12 border border-slate-200 rounded-md bg-slate-50 
@@ -82,14 +83,8 @@
             </div>
         </div>
 
-        <!-- ICON -->
-        <div class="flex-none hidden lg:flex justify-end text-slate-800">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                 stroke-width="2" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </div>
+        <!-- ICON (entfernt) -->
+        <div class="flex-none hidden"></div>
 
     </div>
 
