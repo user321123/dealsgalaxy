@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MioDeals – Deine Deal-Plattform</title>
 
-    <!-- Zentrale Farbvariablen -->
     <style>
         :root {
             --mio-primary: #6EA8FF;
@@ -32,43 +31,48 @@
         }
 
         /* ------------------------------------------------------ */
-        /* DESKTOP HEADER OPTIMIERUNG – LOGO AUSRICHTEN           */
+        /* DESKTOP HEADER OPTIMIERUNG                            */
         /* ------------------------------------------------------ */
         @media (min-width: 1024px) {
 
-            /* Logo soll exakt dort starten, wo die Karten beginnen */
+            /* Navbar wie Grid ausrichten */
             .navbar {
-                padding-left: 1rem !important;  /* entspricht px-4 → 16px */
-                padding-right: 1rem !important;
+                position: relative;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding-left: 1rem;
+                padding-right: 1rem;
             }
 
-            /* Logo selbst bündig halten */
+            /* Logo bündig mit Grid */
             .navbar > div:first-child {
                 margin-left: 0 !important;
+            }
+
+            /* Suchleiste exakt mittig */
+            .search-wrapper {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+                max-width: 900px;
+            }
+
+            /* Menü-Icon rechts, vertikal mittig zur Suchleiste */
+            .menu-icon-desktop {
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
             }
         }
     </style>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        mio: {
-                            primary: "var(--mio-primary)",
-                            secondary: "var(--mio-secondary)",
-                            dark: "var(--mio-dark)",
-                            light: "var(--mio-light)",
-                            white: "var(--mio-white)",
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 
 <body class="bg-mio-light min-h-screen flex flex-col font-sans">
@@ -100,7 +104,7 @@
         </div>
 
         <!-- ICON -->
-        <div class="flex-none hidden lg:flex justify-end text-slate-800">
+        <div class="menu-icon-desktop flex-none hidden lg:flex text-slate-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke-width="2" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -175,3 +179,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
