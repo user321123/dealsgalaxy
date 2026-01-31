@@ -5,7 +5,7 @@ const pageSize = 12;
 
 async function loadProducts() {
     try {
-        const response = await fetch("/dealsgalaxy/products.json");
+        const response = await fetch("/dealsgalaxy/product.json"); // KORRIGIERT
         allProducts = await response.json();
         applyAllAndRender();
         setupEventListeners();
@@ -13,7 +13,7 @@ async function loadProducts() {
         console.warn("Lade lokale Testdaten...");
         allProducts = Array.from({ length: 40 }, (_, i) => ({
             title: `Produkt ${i + 1}`,
-            currentPrice: 20 + i,
+            currentPrice: 20 + i,   // KORRIGIERT
             oldPrice: 40 + i,
             image: "https://via.placeholder.com/300",
             category: "DEAL",
@@ -30,7 +30,10 @@ function setupEventListeners() {
         clearTimeout(timeout);
         timeout = setTimeout(() => { currentPage = 1; applyAllAndRender(); }, 300);
     });
-    document.getElementById("sort-select").addEventListener("change", () => { currentPage = 1; applyAllAndRender(); });
+    document.getElementById("sort-select").addEventListener("change", () => { 
+        currentPage = 1; 
+        applyAllAndRender(); 
+    });
 }
 
 function applyAllAndRender() {
