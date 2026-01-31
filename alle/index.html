@@ -30,6 +30,42 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
+
+        /* --------------------------------------------- */
+        /* DESKTOP HEADER OPTIMIERUNG (ab 1024px)        */
+        /* --------------------------------------------- */
+        @media (min-width: 1024px) {
+
+            /* Navbar bündig ausrichten */
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                width: 100%;
+            }
+
+            /* Logo links bündig */
+            .navbar > div:first-child {
+                margin-left: 0 !important;
+            }
+
+            /* Suchleiste exakt mittig */
+            .search-wrapper {
+                flex: 1;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+
+            /* Menü-Icon rechts */
+            .navbar > div:last-child {
+                margin-right: 0 !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: flex-end;
+            }
+        }
     </style>
 
     <!-- Tailwind -->
@@ -97,14 +133,12 @@
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
         <div class="mx-auto flex justify-center gap-2 py-3 px-4 w-full">
 
-            <!-- ACTIVE BUTTON -->
             <a href="../alle/"
                class="px-6 py-2 rounded text-white font-bold text-[10px] tracking-widest uppercase"
                style="background-color: var(--mio-dark);">
                 Alle Deals
             </a>
 
-            <!-- GHOST BUTTONS -->
             <a href="../gaming/"
                class="px-6 py-2 rounded text-slate-500 font-bold text-[10px] tracking-widest uppercase hover:text-mio-secondary transition">
                 Gaming
