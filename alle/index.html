@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MioDeals – Deine Deal-Plattform</title>
 
-    <!-- Zentrale Farbvariablen -->
     <style>
         :root {
             --mio-primary: #6EA8FF;
@@ -32,7 +31,6 @@
         }
     </style>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
@@ -58,11 +56,13 @@
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
 
-    <!-- DESKTOP: Logo + Suche horizontal -->
-    <div class="navbar mx-auto px-4 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 w-full">
+    <!-- DESKTOP: 3-Spalten-Layout für zentrierte Suchleiste -->
+    <div class="navbar mx-auto px-4 py-4 w-full
+                flex flex-col gap-4
+                lg:grid lg:grid-cols-3 lg:items-center">
 
-        <!-- LOGO -->
-        <div class="flex-none">
+        <!-- LOGO (links) -->
+        <div class="flex lg:justify-start">
             <a href="../index.html"
                class="text-3xl lg:text-5xl font-[900] tracking-tighter text-mio-dark select-none inline-flex items-center">
                 M
@@ -73,9 +73,9 @@
             </a>
         </div>
 
-        <!-- SUCHLEISTE -->
-        <div class="search-wrapper flex-grow lg:max-w-[900px]">
-            <div class="relative">
+        <!-- SUCHLEISTE (mittig) -->
+        <div class="search-wrapper flex justify-center">
+            <div class="relative w-full lg:max-w-[600px]">
                 <input id="search-input" type="text" placeholder="Angebote durchsuchen..."
                        class="w-full h-12 px-4 pr-12 border border-slate-200 rounded-md bg-slate-50 
                               focus:bg-white focus:outline-none focus:ring-2 focus:ring-mio-primary transition" />
@@ -83,8 +83,8 @@
             </div>
         </div>
 
-        <!-- ICON (entfernt) -->
-        <div class="flex-none hidden"></div>
+        <!-- LEERER PLATZ (rechts, damit Mitte wirklich Mitte ist) -->
+        <div class="hidden lg:block"></div>
 
     </div>
 
@@ -92,14 +92,12 @@
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
         <div class="mx-auto flex justify-center gap-2 py-3 px-4 w-full">
 
-            <!-- ACTIVE BUTTON -->
             <a href="../alle/"
                class="px-6 py-2 rounded text-white font-bold text-[10px] tracking-widest uppercase"
                style="background-color: var(--mio-dark);">
                 Alle Deals
             </a>
 
-            <!-- GHOST BUTTONS -->
             <a href="../gaming/"
                class="px-6 py-2 rounded text-slate-500 font-bold text-[10px] tracking-widest uppercase hover:text-mio-secondary transition">
                 Gaming
