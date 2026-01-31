@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MioDeals – Deine Deal-Plattform</title>
 
+    <!-- Zentrale Farbvariablen -->
     <style>
         :root {
             --mio-primary: #6EA8FF;
@@ -29,50 +30,28 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-
-        /* ------------------------------------------------------ */
-        /* DESKTOP HEADER OPTIMIERUNG                            */
-        /* ------------------------------------------------------ */
-        @media (min-width: 1024px) {
-
-            /* Navbar wie Grid ausrichten */
-            .navbar {
-                position: relative;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            /* Logo bündig mit Grid */
-            .navbar > div:first-child {
-                margin-left: 0 !important;
-            }
-
-            /* Suchleiste exakt mittig */
-            .search-wrapper {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                width: 100%;
-                max-width: 900px;
-            }
-
-            /* Menü-Icon rechts, vertikal mittig zur Suchleiste */
-            .menu-icon-desktop {
-                position: absolute;
-                right: 1rem;
-                top: 50%;
-                transform: translateY(-50%);
-                display: flex !important;
-                align-items: center;
-                justify-content: center;
-            }
-        }
     </style>
 
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mio: {
+                            primary: "var(--mio-primary)",
+                            secondary: "var(--mio-secondary)",
+                            dark: "var(--mio-dark)",
+                            light: "var(--mio-light)",
+                            white: "var(--mio-white)",
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body class="bg-mio-light min-h-screen flex flex-col font-sans">
@@ -104,7 +83,7 @@
         </div>
 
         <!-- ICON -->
-        <div class="menu-icon-desktop flex-none hidden lg:flex text-slate-800">
+        <div class="flex-none hidden lg:flex justify-end text-slate-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke-width="2" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -118,12 +97,14 @@
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
         <div class="mx-auto flex justify-center gap-2 py-3 px-4 w-full">
 
+            <!-- ACTIVE BUTTON -->
             <a href="../alle/"
                class="px-6 py-2 rounded text-white font-bold text-[10px] tracking-widest uppercase"
                style="background-color: var(--mio-dark);">
                 Alle Deals
             </a>
 
+            <!-- GHOST BUTTONS -->
             <a href="../gaming/"
                class="px-6 py-2 rounded text-slate-500 font-bold text-[10px] tracking-widest uppercase hover:text-mio-secondary transition">
                 Gaming
@@ -179,4 +160,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
