@@ -56,26 +56,22 @@
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
 
-    <!-- DESKTOP: 3-Spalten-Layout für zentrierte Suchleiste -->
     <div class="navbar mx-auto px-4 py-4 w-full
                 flex flex-col gap-4
                 lg:grid lg:grid-cols-[1fr_2fr_1fr] lg:items-center">
 
-        <!-- LOGO (links, mobil zentriert) -->
         <div class="flex justify-center lg:justify-start">
             <a href="../index.html" class="flex items-center">
                 <img src="../assets/Logo-MIODEALS-v2.png" alt="MioDeals Logo" class="h-12 lg:h-16 w-auto select-none">
             </a>
         </div>
 
-        <!-- SUCHLEISTE -->
         <div class="search-wrapper flex justify-center">
             <div class="relative w-full lg:max-w-[1200px] mx-auto">
                 <input id="search-input" type="text" placeholder="Angebote durchsuchen..."
                        class="w-full h-12 px-4 pr-12 border border-slate-200 rounded-md bg-slate-50 
                               focus:bg-white focus:outline-none focus:ring-2 focus:ring-mio-primary transition" />
 
-                <!-- ICON: Lupe → X -->
                 <div id="search-icon"
                      class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold cursor-pointer select-none">
                     ⌕
@@ -83,15 +79,12 @@
             </div>
         </div>
 
-        <!-- LEERER PLATZ -->
         <div class="hidden lg:block"></div>
 
     </div>
 
-    <!-- NAV -->
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
-    <div class="mx-auto flex justify-start gap-2 py-3 px-4 pl-4 w-full">
-
+        <div class="mx-auto flex justify-start gap-2 py-3 px-4 pl-4 w-full">
 
             <a href="../alle/"
                class="px-6 py-2 rounded text-white font-bold text-[10px] tracking-widest uppercase"
