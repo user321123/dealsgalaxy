@@ -138,9 +138,13 @@ function renderPagination() {
 
 window.changePage = (p) => {
     currentPage = p;
-    window.scrollTo({top: 0, behavior: 'smooth'});
     renderGrid();
     renderPagination();
+
+    setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 10);
 };
+
 
 loadProducts();
