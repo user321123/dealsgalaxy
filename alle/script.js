@@ -5,7 +5,7 @@ const pageSize = 12;
 
 async function loadProducts() {
     try {
-        const response = await fetch("/dealsgalaxy/product.json"); // KORRIGIERT
+        const response = await fetch("/dealsgalaxy/product.json");
         allProducts = await response.json();
         applyAllAndRender();
         setupEventListeners();
@@ -13,7 +13,7 @@ async function loadProducts() {
         console.warn("Lade lokale Testdaten...");
         allProducts = Array.from({ length: 40 }, (_, i) => ({
             title: `Produkt ${i + 1}`,
-            currentPrice: 20 + i,   // KORRIGIERT
+            currentPrice: 20 + i,
             oldPrice: 40 + i,
             image: "https://via.placeholder.com/300",
             category: "DEAL",
@@ -26,15 +26,49 @@ async function loadProducts() {
 
 function setupEventListeners() {
     let timeout;
+
     document.getElementById("search-input").addEventListener("input", () => {
         clearTimeout(timeout);
-        timeout = setTimeout(() => { currentPage = 1; applyAllAndRender(); }, 300);
+        timeout = setTimeout(() => { 
+            currentPage = 1; 
+            applyAllAndRender(); 
+        }, 300);
     });
+
     document.getElementById("sort-select").addEventListener("change", () => { 
         currentPage = 1; 
         applyAllAndRender(); 
     });
 }
+
+/* -------------------------------------------
+   SUCHFELD: Lupe → X + Clear-Funktion
+------------------------------------------- */
+const searchInput = document.getElementById("search-input");
+const searchIcon = document.getElementById("search-icon");
+
+// Icon wechseln
+searchInput.addEventListener("input", () => {
+    if (searchInput.value.trim().length > 0) {
+        searchIcon.textContent = "✕";
+        searchIcon.classList.add("text-slate-500");
+    } else {
+        searchIcon.textContent = "⌕";
+        searchIcon.classList.remove("text-slate-500");
+    }
+});
+
+// X klick → löschen + neu rendern
+searchIcon.addEventListener("click", () => {
+    if (searchInput.value.trim().length > 0) {
+        searchInput.value = "";
+        searchInput.dispatchEvent(new Event("input"));
+        currentPage = 1;
+        applyAllAndRender();
+        searchInput.focus();
+    }
+});
+/* ------------------------------------------- */
 
 function applyAllAndRender() {
     const search = document.getElementById("search-input").value.toLowerCase();
@@ -50,6 +84,7 @@ function applyAllAndRender() {
             return getD(b) - getD(a);
         });
     }
+
     renderGrid();
     renderPagination();
 }
