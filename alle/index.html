@@ -61,24 +61,29 @@
                 flex flex-col gap-4
                 lg:grid lg:grid-cols-3 lg:items-center">
 
-        <!-- LOGO (links) -->
-       <div class="flex justify-center lg:justify-start">
+        <!-- LOGO (links, mobil zentriert) -->
+        <div class="flex justify-center lg:justify-start">
             <a href="../index.html" class="flex items-center">
                 <img src="../assets/Logo-MIODEALS-v2.png" alt="MioDeals Logo" class="h-12 lg:h-16 w-auto select-none">
             </a>
         </div>
 
-        <!-- SUCHLEISTE (mittig, volle Größe wie vorher) -->
+        <!-- SUCHLEISTE -->
         <div class="search-wrapper flex justify-center">
             <div class="relative w-full lg:max-w-[900px] mx-auto">
                 <input id="search-input" type="text" placeholder="Angebote durchsuchen..."
                        class="w-full h-12 px-4 pr-12 border border-slate-200 rounded-md bg-slate-50 
                               focus:bg-white focus:outline-none focus:ring-2 focus:ring-mio-primary transition" />
-                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">⌕</div>
+
+                <!-- ICON: Lupe → X -->
+                <div id="search-icon"
+                     class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold cursor-pointer select-none">
+                    ⌕
+                </div>
             </div>
         </div>
 
-        <!-- LEERER PLATZ (rechts, damit Mitte wirklich Mitte ist) -->
+        <!-- LEERER PLATZ -->
         <div class="hidden lg:block"></div>
 
     </div>
