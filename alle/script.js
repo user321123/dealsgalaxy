@@ -47,7 +47,6 @@ function setupEventListeners() {
 const searchInput = document.getElementById("search-input");
 const searchIcon = document.getElementById("search-icon");
 
-// Icon wechseln
 searchInput.addEventListener("input", () => {
     if (searchInput.value.trim().length > 0) {
         searchIcon.textContent = "✕";
@@ -58,7 +57,6 @@ searchInput.addEventListener("input", () => {
     }
 });
 
-// X klick → löschen + neu rendern
 searchIcon.addEventListener("click", () => {
     if (searchInput.value.trim().length > 0) {
         searchInput.value = "";
@@ -96,25 +94,39 @@ function renderGrid() {
 
     grid.innerHTML = items.map(p => {
         const disc = p.discount || (p.oldPrice ? Math.round(100-(p.currentPrice/p.oldPrice*100)) : 0);
+
         return `
-        <article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full">
-            <div class="relative bg-slate-100 flex justify-center items-center h-44 md:h-64 p-6">
-                ${disc > 0 ? `<div class="absolute top-4 left-4 px-2.5 py-1.5 bg-[var(--mio-secondary)] text-white font-black text-[10px] md:text-xs rounded z-10">-${disc}%</div>` : ''}
-                <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain mix-blend-multiply" loading="lazy" />
+<article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full">
+
+    <div class="relative bg-slate-100 flex justify-center items-center h-32 md:h-64 p-4">
+        ${disc > 0 ? `<div class="absolute top-3 left-3 px-2 py-1 bg-[var(--mio-secondary)] text-white font-black text-[9px] md:text-xs rounded z-10">-${disc}%</div>` : ''}
+        <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain mix-blend-multiply" loading="lazy" />
+    </div>
+
+    <div class="p-3 md:p-6 flex flex-col flex-grow bg-white">
+        <span class="text-[8px] md:text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">${p.category || 'EXKLUSIV'}</span>
+
+        <h3 class="font-bold text-slate-800 text-xs md:text-base line-clamp-2 leading-tight mb-2 h-8 md:h-12">
+            ${p.title}
+        </h3>
+
+        <div class="mt-auto pb-2">
+            <div class="text-xl md:text-4xl font-[900] text-[var(--mio-secondary)] tracking-tighter">
+                ${p.currentPrice.toFixed(2).replace('.', ',')}€
             </div>
-            <div class="p-5 md:p-6 flex flex-col flex-grow bg-white">
-                <span class="text-[9px] md:text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">${p.category || 'EXKLUSIV'}</span>
-                <h3 class="font-bold text-slate-800 text-sm md:text-base line-clamp-2 leading-tight mb-4 h-10 md:h-12">${p.title}</h3>
-                <div class="mt-auto pb-4">
-                    <div class="text-2xl md:text-4xl font-[900] text-[var(--mio-secondary)] tracking-tighter">${p.currentPrice.toFixed(2).replace('.', ',')}€</div>
-                    ${p.oldPrice ? `<div class="text-[10px] md:text-xs text-slate-400 font-medium">Statt <span class="line-through">${p.oldPrice.toFixed(2).replace('.', ',')}€</span></div>` : ''}
-                </div>
-            </div>
-            <a href="${p.url}" target="_blank"
-               class="bg-mio-dark hover:bg-slate-700 text-white text-center py-4 font-bold text-sm uppercase tracking-widest block">
-               Zum Angebot
-            </a>
-        </article>`;
+
+            ${p.oldPrice ? `<div class="text-[9px] md:text-xs text-slate-400 font-medium">
+                Statt <span class="line-through">${p.oldPrice.toFixed(2).replace('.', ',')}€</span>
+            </div>` : ''}
+        </div>
+    </div>
+
+    <a href="${p.url}" target="_blank"
+       class="bg-mio-dark hover:bg-slate-700 text-white text-center py-3 md:py-4 font-bold text-xs md:text-sm uppercase tracking-widest block">
+       Zum Angebot
+    </a>
+
+</article>`;
     }).join('');
 }
 
@@ -145,6 +157,5 @@ window.changePage = (p) => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 10);
 };
-
 
 loadProducts();
