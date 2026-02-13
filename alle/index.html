@@ -31,53 +31,22 @@
         }
 
         /* -----------------------------------------
-           WASSERZEICHEN HINTER DEN KARTEN (MAIN)
+           PROFESSIONELLES SVG-WASSERZEICHEN
+           Wiederholt sich automatisch über Main
         ----------------------------------------- */
         main {
             position: relative;
-            z-index: 1; /* Inhalt bleibt oben */
-        }
+            z-index: 1;
 
-        main::before {
-            content:
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
-                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A";
-
-            white-space: pre;
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            pointer-events: none;
-            z-index: 0;
-
-            font-size: 1.4rem;          /* Sichtbarer */
-            font-weight: 900;
-            line-height: 48px;          /* Zeilenabstand */
-            color: rgba(0, 0, 0, 0.06);  /* Deutlich sichtbar, aber dezent */
-
-            opacity: 0.25;              /* Professioneller Look */
+            /* SVG als wiederholbares Pattern */
+            background-image: url("data:image/svg+xml;utf8,\
+                <svg xmlns='http://www.w3.org/2000/svg' width='900' height='60'>\
+                    <text x='0' y='40' font-size='28' font-weight='900' fill='rgba(0,0,0,0.05)'>\
+                        MioDeals MioDeals MioDeals MioDeals MioDeals\
+                    </text>\
+                </svg>");
+            background-repeat: repeat;
+            background-size: 900px 60px; /* Breite der Zeile + Zeilenhöhe */
         }
     </style>
 
