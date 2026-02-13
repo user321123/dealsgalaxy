@@ -31,33 +31,72 @@
         }
 
         /* -----------------------------------------
-           HORIZONTALES WASSERZEICHEN "MioDeals"
+           VOLLFLÄCHIGES HORIZONTALES WASSERZEICHEN
         ----------------------------------------- */
+        body {
+            position: relative;
+        }
+
         body::before {
-            content: "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals";
+            content: "";
             position: fixed;
-            top: 120px; /* Startpunkt unter dem Header */
+            top: 0; /* GANZE SEITE */
             left: 0;
             width: 100%;
-            height: calc(100% - 120px);
-
-            font-size: 1.6rem; /* kleinere Schrift */
-            font-weight: 900;
-            color: rgba(0, 0, 0, 0.04);
-
-            white-space: nowrap;
-            line-height: 60px; /* Abstand zwischen den Zeilen */
-
+            height: 100%;
             pointer-events: none;
             z-index: -1;
 
-            background-repeat: repeat-y;
-            background-size: 100% 60px;
-            background-image: linear-gradient(
+            /* Wiederholtes Textmuster */
+            background-image:
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.04) 0,
+                    rgba(0, 0, 0, 0.04) 1px,
+                    transparent 1px,
+                    transparent 60px
+                ),
+                repeating-linear-gradient(
+                    to right,
+                    transparent 0,
+                    transparent 100%
+                );
+
+            /* Text als Overlay */
+            mask-image: repeating-linear-gradient(
                 to bottom,
-                currentColor 0,
-                currentColor 0
+                black 0 60px,
+                transparent 60px 60px
             );
+
+            -webkit-mask-image: repeating-linear-gradient(
+                to bottom,
+                black 0 60px,
+                transparent 60px 60px
+            );
+
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.04);
+
+            /* Der Text selbst */
+            background-size: 100% 60px;
+            background-repeat: repeat-y;
+            background-position: 0 0;
+
+            /* Der eigentliche Text */
+            background-image:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0 60px
+                ),
+                url("data:image/svg+xml;utf8,
+                    <svg xmlns='http://www.w3.org/2000/svg' width='2000' height='60'>
+                        <text x='0' y='40' font-size='28' font-weight='900' fill='rgba(0,0,0,0.04)'>
+                            MioDeals   MioDeals   MioDeals   MioDeals   MioDeals   MioDeals
+                        </text>
+                    </svg>"
+                );
         }
     </style>
 
